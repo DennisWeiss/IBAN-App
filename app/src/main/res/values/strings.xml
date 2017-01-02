@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">IBAN</string>
+    <string-array name="country_array">
+        <item>Andorra</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Bahrain</item>
+        <item>Costa Rica</item>
+        <item>Croatia</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Dominican Republic</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Gibraltar</item>
+        <item>Greece</item>
+        <item>Greenland</item>
+        <item>Jordan</item>
+        <item>Kazakhstan</item>
+        <item>Kosovo</item>
+        <item>Kuwait</item>
+        <item>Latvia</item>
+        <item>Lebanon</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Malta</item>
+        <item>Moldova</item>
+        <item>Netherlands</item>
+        <item>Pakistan</item>
+        <item>Qatar</item>
+        <item>Saudi Arabia</item>
+        <item>Slovakia</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Tunisia</item>
+        <item>United Arab Emirates</item>
+        <item>United Kingdom</item>
+        <item>Virgin Islands, British</item>
+    </string-array>
+</resources>
