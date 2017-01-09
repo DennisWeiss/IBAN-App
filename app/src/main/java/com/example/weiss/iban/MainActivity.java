@@ -1,26 +1,19 @@
 package com.example.weiss.iban;
 
-import android.*;
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.view.inputmethod.InputMethodManager;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -29,10 +22,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
 
         Spinner country = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (countryCode.equals("jo")) {
             int spinnerPosition = adapter.getPosition("Jordan");
             spinner.setSelection(spinnerPosition);
-        }  else if (countryCode.equals("kz")) {
+        } else if (countryCode.equals("kz")) {
             int spinnerPosition = adapter.getPosition("Kazakhstan");
             spinner.setSelection(spinnerPosition);
         } else if (countryCode.equals("xk")) {
@@ -476,10 +473,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (method.equals("bsc")) {
             ibannumber = ibanGenerator.getIBANbsc(countrycode, bankcode.getText().toString(), branchcode.getText().toString(), accountnumber.getText().toString(), b, s, c);
-            Log.i("IBAN Calculation", "IBAN Calculation completed");
         } else if (method.equals("bc")) {
             ibannumber = ibanGenerator.getIBANbc(countrycode, bankcode.getText().toString(), accountnumber.getText().toString(), b, c);
-            Log.i("IBAN Calculation", "IBAN Calculation completed");
         }
 
         iban.setText(ibannumber);
@@ -492,5 +487,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

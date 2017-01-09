@@ -39,4 +39,6 @@
         <item>United Kingdom</item>
         <item>Virgin Islands, British</item>
     </string-array>
+
+    <string name="action_settings">Quit</string>
 </resources>
