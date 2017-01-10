@@ -40,5 +40,5 @@
         <item>Virgin Islands, British</item>
     </string-array>
 
-    <string name="action_settings">Quit</string>
+    <string name="action_settings">Settings</string>
 </resources>
