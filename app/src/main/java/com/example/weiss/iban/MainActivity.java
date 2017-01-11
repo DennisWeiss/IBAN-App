@@ -2,7 +2,9 @@ package com.example.weiss.iban;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
+
         Spinner country = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.country_array, android.R.layout.simple_spinner_item);
@@ -46,7 +49,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String countryCode = tm.getSimCountryIso();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String countryCode;
+
+        if (sharedPreferences.getBoolean("USESIMLOCATION", true)) {
+             countryCode = tm.getSimCountryIso();
+        } else {
+            countryCode = sharedPreferences.getString("COUNTRY", "Germany");
+        }
+
 
         EditText iban = (EditText) findViewById(R.id.iban);
 
@@ -501,6 +514,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+                Intent currentIntent = new Intent(MainActivity.this, MainActivity.class);
+                IntentContainer.intent = currentIntent;
                 Intent intent = new Intent(MainActivity.this, Settings.class);
                 startActivity(intent);
                 return true;
