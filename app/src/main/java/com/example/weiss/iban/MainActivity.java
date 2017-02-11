@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,13 +54,91 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String countryCode;
+        String countryCode = "AD";
 
         if (sharedPreferences.getBoolean("USESIMLOCATION", true)) {
              countryCode = tm.getSimCountryIso();
         } else {
-            countryCode = sharedPreferences.getString("COUNTRY", "Germany");
+            if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Andorra")) {
+                countryCode = "AD";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Austria")) {
+                countryCode = "AU";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Azerbaijan")) {
+                countryCode = "AZ";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Bahrain")) {
+                countryCode = "BH";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Costa Rica")) {
+                countryCode = "CR";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Croatia")) {
+                countryCode = "HR";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Cyprus")) {
+                countryCode = "CY";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Czech Republic")) {
+                countryCode = "CZ";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Denmark")) {
+                countryCode = "DK";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Dominican Republic")) {
+                countryCode = "DO";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Georgia")) {
+                countryCode = "GE";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Germany")) {
+                countryCode = "DE";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Gibraltar")) {
+                countryCode = "GI";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Greece")) {
+                countryCode = "GR";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Greenland")) {
+                countryCode = "GL";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Jordan")) {
+                countryCode = "JO";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Kazakhstan")) {
+                countryCode = "KZ";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Kosovo")) {
+                countryCode = "XK";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Kuwait")) {
+                countryCode = "KW";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Latvia")) {
+                countryCode = "LV";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Lebanon")) {
+                countryCode = "LB";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Liechtenstein")) {
+                countryCode = "LI";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Lithuania")) {
+                countryCode = "LT";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Luxembourg")) {
+                countryCode = "LU";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Malta")) {
+                countryCode = "MT";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Moldova")) {
+                countryCode = "MD";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Netherlands")) {
+                countryCode = "NL";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Pakistan")) {
+                countryCode = "PK";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Qatar")) {
+                countryCode = "QA";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Saudi Arabia")) {
+                countryCode = "SA";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Slovakia")) {
+                countryCode = "SK";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Sweden")) {
+                countryCode = "SE";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Switzerland")) {
+                countryCode = "CH";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Tunisia")) {
+                countryCode = "TH";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("United Arab Emirates")) {
+                countryCode = "AE";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("United Kingdom")) {
+                countryCode = "GB";
+            } else if (sharedPreferences.getString("COUNTRY", "Andorra").equals("Virgin Islands, British")) {
+                countryCode = "VG";
+            }
         }
+
+        Log.i("COUNTRYCODE", countryCode);
+
+        countryCode = countryCode.toLowerCase();
 
 
         EditText iban = (EditText) findViewById(R.id.iban);
@@ -513,12 +593,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent currentIntent = new Intent(MainActivity.this, MainActivity.class);
-                IntentContainer.intent = currentIntent;
-                Intent intent = new Intent(MainActivity.this, Settings.class);
-                startActivity(intent);
+            case R.id.check:
+                IntentContainer.intent = new Intent(MainActivity.this, MainActivity.class);;
+                startActivity(new Intent(MainActivity.this, CheckIBAN.class));
                 return true;
+            case R.id.action_settings:
+                IntentContainer.intent = new Intent(MainActivity.this, MainActivity.class);;
+                startActivity(new Intent(MainActivity.this, Settings.class));
+                return true;
+
         }
         return true;
     }

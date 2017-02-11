@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,9 @@ public class Settings extends Activity{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         country.setAdapter(adapter);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar.setTitle("Settings");
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -83,8 +87,7 @@ public class Settings extends Activity{
 
     @Override
     public void onBackPressed() {
-        Intent intent = IntentContainer.intent;
-        startActivity(intent);
+        startActivity(IntentContainer.intent);
     }
 
     private void SavePrefs(String key, boolean value) {

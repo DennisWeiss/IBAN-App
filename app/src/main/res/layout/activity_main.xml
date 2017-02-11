@@ -10,6 +10,8 @@
     android:paddingTop="0dp"
     tools:context=".MainActivity">
 
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
