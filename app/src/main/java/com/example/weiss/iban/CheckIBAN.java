@@ -27,6 +27,5 @@ public class CheckIBAN extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkiban);
 
-
     }
 }
