@@ -68,6 +68,14 @@
                 android:id="@+id/imageView"
                 />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:textAlignment="center" />
+
         </LinearLayout>
     </ScrollView>
 
