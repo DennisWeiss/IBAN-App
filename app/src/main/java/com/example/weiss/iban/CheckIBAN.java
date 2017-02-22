@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,11 +26,13 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+
 /**
  * Created by weiss on 1/10/2017.
  */
 
-public class CheckIBAN extends AppCompatActivity{
+public class CheckIBAN extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class CheckIBAN extends AppCompatActivity{
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
-        toolbar.setTitle("Check IBAN");
+        toolbar.setTitle("Validate IBAN");
         setSupportActionBar(toolbar);
 
         image.getLayoutParams().height = 150;
@@ -66,17 +72,48 @@ public class CheckIBAN extends AppCompatActivity{
             return false;
         }
         iban = iban.toUpperCase();
-        String ibanNumbers = String.valueOf(iban.charAt(0) - 55) + String.valueOf(iban.charAt(1) - 55)
-                + iban.substring(2);
+        String ibanNumbers = iban.substring(4) + iban.substring(0, 4);
+        ibanNumbers = replaceAllLetters(ibanNumbers);
+        Log.i("IBAN NUMBERS", ibanNumbers);
         if (!lengthIsValid(iban.substring(0, 2), ibanNumbers.length())) {
             return false;
         }
-        return false;
+        BigInteger number = new BigInteger(ibanNumbers);
+        BigInteger remainder = number.mod(new BigInteger("97"));
+        return remainder.equals(new BigInteger("1"));
+    }
+
+    String replaceAllLetters(String str) {
+        str = str.replaceAll("A", "10");
+        str = str.replaceAll("B", "11");
+        str = str.replaceAll("C", "12");
+        str = str.replaceAll("D", "13");
+        str = str.replaceAll("E", "14");
+        str = str.replaceAll("F", "15");
+        str = str.replaceAll("G", "16");
+        str = str.replaceAll("H", "17");
+        str = str.replaceAll("I", "18");
+        str = str.replaceAll("J", "19");
+        str = str.replaceAll("K", "20");
+        str = str.replaceAll("L", "21");
+        str = str.replaceAll("M", "22");
+        str = str.replaceAll("N", "23");
+        str = str.replaceAll("O", "24");
+        str = str.replaceAll("P", "25");
+        str = str.replaceAll("Q", "26");
+        str = str.replaceAll("R", "27");
+        str = str.replaceAll("S", "28");
+        str = str.replaceAll("T", "29");
+        str = str.replaceAll("U", "30");
+        str = str.replaceAll("V", "31");
+        str = str.replaceAll("W", "32");
+        str = str.replaceAll("X", "33");
+        str = str.replaceAll("Y", "34");
+        str = str.replaceAll("Z", "35");
+        return str;
     }
 
     boolean lengthIsValid(String country, int length) {
-        Log.i("Country", country);
-        Log.i("Length", String.valueOf(length));
         switch (country) {
             case "AL":
                 return length == 28;
@@ -218,5 +255,36 @@ public class CheckIBAN extends AppCompatActivity{
                 return length == 24;
         }
         return false;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.validate_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.iban:
+                IntentContainer.intent = new Intent(CheckIBAN.this, CheckIBAN.class);;
+                startActivity(new Intent(CheckIBAN.this, MainActivity.class));
+                return true;
+            case R.id.action_settings:
+                IntentContainer.intent = new Intent(CheckIBAN.this, CheckIBAN.class);;
+                startActivity(new Intent(CheckIBAN.this, Settings.class));
+                return true;
+        }
+        return true;
     }
 }

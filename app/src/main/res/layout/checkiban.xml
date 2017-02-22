@@ -53,7 +53,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:text="Check"
+                android:text="Validate"
                 android:layout_width="132dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/imageView"
+                android:layout_marginTop="10dp"
                 />
 
             <TextView
